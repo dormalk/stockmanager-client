@@ -1,7 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import ReactMarkdown from 'react-markdown'
-import { streamChat, type ChatMessage } from '../../api/chat'
+import {
+  streamChat,
+  saveChatSession,
+  fetchChatSessions,
+  fetchChatSession,
+  deleteChatSession,
+  type ChatMessage,
+  type ChatSessionSummary,
+} from '../../api/chat'
 import { apiBase } from '../../api/client'
 import './AIChatPanel.css'
 
@@ -28,8 +36,12 @@ export default function AIChatPanel({ ticker }: Props) {
   const [messages, setMessages]     = useState<UIMessage[]>([])
   const [input, setInput]           = useState('')
   const [isStreaming, setIsStreaming] = useState(false)
+  const [sessions, setSessions]     = useState<ChatSessionSummary[]>([])
+  const [historyOpen, setHistoryOpen] = useState(false)
   const abortRef  = useRef<AbortController | null>(null)
   const bottomRef = useRef<HTMLDivElement | null>(null)
+  const messagesRef = useRef<UIMessage[]>([])
+  const prevTickerRef = useRef(ticker)
 
   const { data: keyStatus } = useQuery({
     queryKey: ['api-key-status'],
@@ -38,16 +50,54 @@ export default function AIChatPanel({ ticker }: Props) {
   })
   const hasKey = keyStatus?.gemini_api_key_configured === true
 
-  // Reset on ticker change
+  useEffect(() => { messagesRef.current = messages }, [messages])
+
+  function completedMessages(msgs: UIMessage[]): ChatMessage[] {
+    return msgs
+      .filter(m => !m.streaming && !m.error)
+      .map(m => ({ role: m.role, content: m.content }))
+  }
+
+  function refreshSessions(t: string) {
+    fetchChatSessions(t).then(setSessions)
+  }
+
+  // Reset on ticker change, persisting the previous ticker's conversation
   useEffect(() => {
+    const prevTicker = prevTickerRef.current
+    const prevMessages = completedMessages(messagesRef.current)
+    if (prevTicker !== ticker && prevMessages.length > 0) {
+      saveChatSession(prevTicker, prevMessages)
+    }
+    prevTickerRef.current = ticker
+
     abortRef.current?.abort()
     setMessages([])
     setInput('')
     setIsStreaming(false)
+    setHistoryOpen(false)
+    refreshSessions(ticker)
   }, [ticker])
 
-  // Cleanup on unmount
-  useEffect(() => () => { abortRef.current?.abort() }, [])
+  // Cleanup on unmount: persist the conversation
+  useEffect(() => () => {
+    abortRef.current?.abort()
+    const finalMessages = completedMessages(messagesRef.current)
+    if (finalMessages.length > 0) saveChatSession(prevTickerRef.current, finalMessages)
+  }, [])
+
+  function loadSession(id: number) {
+    fetchChatSession(ticker, id).then(s => {
+      if (!s) return
+      setMessages(s.messages.map(m => ({ role: m.role, content: m.content })))
+      setHistoryOpen(false)
+    })
+  }
+
+  function removeSession(id: number, e: React.MouseEvent) {
+    e.stopPropagation()
+    deleteChatSession(ticker, id).then(() => refreshSessions(ticker))
+  }
 
   // Auto-scroll to bottom on new content
   useEffect(() => {
@@ -128,16 +178,59 @@ export default function AIChatPanel({ ticker }: Props) {
     <section className="ai-chat-panel" aria-label="AI stock chat">
       <div className="ai-chat-panel__header">
         <span className="text-label">AI Chat</span>
-        {messages.length > 0 && (
-          <button
-            className="btn btn--ghost btn--sm"
-            onClick={() => { abortRef.current?.abort(); setMessages([]); setInput(''); setIsStreaming(false) }}
-            aria-label="Clear chat"
-          >
-            Clear
-          </button>
-        )}
+        <div className="ai-chat-panel__header-right">
+          {sessions.length > 0 && (
+            <button
+              className="btn btn--ghost btn--sm"
+              onClick={() => setHistoryOpen(o => !o)}
+              aria-expanded={historyOpen}
+              aria-label="Toggle chat history"
+            >
+              History ({sessions.length})
+            </button>
+          )}
+          {messages.length > 0 && (
+            <button
+              className="btn btn--ghost btn--sm"
+              onClick={() => {
+                abortRef.current?.abort()
+                const completed = completedMessages(messages)
+                if (completed.length > 0) {
+                  saveChatSession(ticker, completed).then(() => refreshSessions(ticker))
+                }
+                setMessages([])
+                setInput('')
+                setIsStreaming(false)
+              }}
+              aria-label="Clear chat"
+            >
+              Clear
+            </button>
+          )}
+        </div>
       </div>
+
+      {historyOpen && (
+        <ul className="ai-chat-history-list">
+          {sessions.map(s => (
+            <li key={s.id} className="ai-chat-history-item" onClick={() => loadSession(s.id)}>
+              <div className="ai-chat-history-item__main">
+                <span className="text-caption ai-chat-history-item__title">{s.title}</span>
+                <span className="text-caption color-muted">
+                  {new Date(s.created_at).toLocaleString()} · {s.message_count} messages
+                </span>
+              </div>
+              <button
+                className="link-btn text-caption ai-chat-history-item__delete"
+                onClick={(e) => removeSession(s.id, e)}
+                aria-label="Delete this chat session"
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {/* API key not configured */}
       {keyStatus && !hasKey && (

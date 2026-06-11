@@ -9,9 +9,13 @@ vi.stubGlobal('fetch', mockFetch)
 // jsdom doesn't implement scrollIntoView
 window.HTMLElement.prototype.scrollIntoView = vi.fn()
 
-// Mock streamChat so tests don't hit the real network
+// Mock streamChat and session-history APIs so tests don't hit the real network
 vi.mock('../../api/chat', () => ({
   streamChat: vi.fn(),
+  saveChatSession: vi.fn().mockResolvedValue(undefined),
+  fetchChatSessions: vi.fn().mockResolvedValue([]),
+  fetchChatSession: vi.fn().mockResolvedValue(null),
+  deleteChatSession: vi.fn().mockResolvedValue(undefined),
 }))
 
 function renderPanel(ticker = 'AAPL') {
@@ -268,6 +272,31 @@ describe('AIChatPanel — multi-turn & session management', () => {
       expect(screen.getByText('Is this stock overvalued?')).toBeInTheDocument()
     )
     expect(screen.queryByRole('button', { name: /clear/i })).not.toBeInTheDocument()
+  })
+
+  it('shows History button with count when past sessions exist', async () => {
+    const { fetchChatSessions } = await import('../../api/chat')
+    vi.mocked(fetchChatSessions).mockResolvedValue([
+      { id: 1, title: 'Is AAPL overvalued?', created_at: '2026-06-09T00:00:00Z', message_count: 2 },
+    ])
+    await setupWithKey()
+    renderPanel()
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /toggle chat history/i })).toBeInTheDocument()
+    )
+    expect(screen.getByRole('button', { name: /toggle chat history/i })).toHaveTextContent('History (1)')
+  })
+
+  it('clicking History reveals saved session titles', async () => {
+    const { fetchChatSessions } = await import('../../api/chat')
+    vi.mocked(fetchChatSessions).mockResolvedValue([
+      { id: 1, title: 'Is AAPL overvalued?', created_at: '2026-06-09T00:00:00Z', message_count: 2 },
+    ])
+    await setupWithKey()
+    renderPanel()
+    await waitFor(() => screen.getByRole('button', { name: /toggle chat history/i }))
+    fireEvent.click(screen.getByRole('button', { name: /toggle chat history/i }))
+    expect(screen.getByText('Is AAPL overvalued?')).toBeInTheDocument()
   })
 
   it('AC-5: no localStorage writes during chat session', async () => {
