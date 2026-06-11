@@ -1,0 +1,40 @@
+.settings-page { display: flex; flex-direction: column; gap: var(--space-xl); }
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.status-badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.status-badge--ok      { background: var(--color-bull-bg);     color: var(--color-bull); }
+.status-badge--missing { background: var(--color-bear-bg);     color: var(--color-bear); }
+
+.settings-instructions {
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.settings-instructions ol { padding-left: var(--space-lg); }
+.settings-instructions li { margin-bottom: 4px; }
+.settings-instructions code { background: var(--color-surface); padding: 1px 5px; border-radius: var(--radius-sm); font-family: var(--font-mono); }

@@ -1,0 +1,92 @@
+.competitors-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.competitors-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.competitors-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.competitors-hint {
+  font-style: italic;
+}
+
+.competitors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Normal row (clickable link) ─────────────────────────────────────── */
+.competitor-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.competitor-row:hover { background: var(--color-surface-raised); }
+
+/* ── Select mode row (label wrapping checkbox) ───────────────────────── */
+.competitor-row--selectable {
+  cursor: pointer;
+}
+
+.competitor-row--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.competitor-checkbox {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.competitor-row--disabled .competitor-checkbox {
+  cursor: not-allowed;
+}
+
+/* ── Row content ─────────────────────────────────────────────────────── */
+.competitor-row__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.competitor-row__ticker { font-weight: 600; }
+
+.competitor-row__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.competitor-row__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}

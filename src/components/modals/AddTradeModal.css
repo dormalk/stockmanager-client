@@ -1,0 +1,198 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Mobile: bottom sheet (AC-12) ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .modal-backdrop {
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: none;
+  }
+
+  /* Drag handle decorative bar */
+  .modal::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin: var(--space-sm) auto var(--space-xs);
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modal__close {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
+
+.modal__close:hover { color: var(--color-text-primary); }
+
+.modal__body {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+/* ── Fields ─────────────────────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  letter-spacing: var(--text-label-ls);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.field__input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  outline: none;
+}
+
+.field__input:focus {
+  border-color: var(--color-accent);
+}
+
+.field__input--error {
+  border-color: var(--color-bear);
+}
+
+.field__error {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  color: var(--color-bear);
+  margin-top: 2px;
+}
+
+/* ── Segmented control ───────────────────────────────────────────────── */
+.segmented {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.segmented__btn {
+  flex: 1;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  letter-spacing: var(--text-label-ls);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.segmented__btn:hover { background: var(--color-surface-raised); }
+
+.segmented__btn--active.segmented__btn--bull {
+  background: var(--color-bull-bg);
+  color: var(--color-bull);
+}
+
+.segmented__btn--active.segmented__btn--bear {
+  background: var(--color-bear-bg);
+  color: var(--color-bear);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+.btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-data-weight);
+  cursor: pointer;
+  border: none;
+  transition: background 0.1s ease;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+.btn--primary:hover:not(:disabled) { background: var(--color-accent-dim); }
+.btn--primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.btn--ghost:hover { background: var(--color-surface-raised); }
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.link-btn:hover { text-decoration: underline; }

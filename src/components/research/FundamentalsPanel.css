@@ -1,0 +1,56 @@
+.fund-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.fund-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.fund-panel__legend {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.fund-panel__error {
+  padding: var(--space-sm);
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-sm);
+}
+
+.fund-panel__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-sm);
+}
+
+.metric-row:hover { background: var(--color-surface-raised); }
+
+.metric-row__label {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: default;
+}
+
+.metric-row__value { font-weight: 600; }
+
+.color-amber { color: var(--color-alert-amber); }

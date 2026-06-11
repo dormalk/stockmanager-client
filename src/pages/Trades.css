@@ -1,0 +1,27 @@
+.trades-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.trades-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.filter-input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 5px 10px;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  outline: none;
+  width: 200px;
+}
+
+.filter-input::placeholder { color: var(--color-text-muted); }
+.filter-input:focus { border-color: var(--color-accent); }

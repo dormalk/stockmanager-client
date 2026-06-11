@@ -1,0 +1,142 @@
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.2s ease, min-width 0.2s ease;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar--collapsed {
+  width: var(--sidebar-collapsed);
+  min-width: var(--sidebar-collapsed);
+}
+
+.sidebar__nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-sm);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ── Nav items ───────────────────────────────────────────────────────── */
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 36px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  border-left: 3px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.sidebar__item:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-text-primary);
+}
+
+.sidebar__item--active {
+  border-left-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.sidebar__item--active:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-accent);
+}
+
+.sidebar__icon {
+  font-size: 16px;
+  min-width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Ticker search ───────────────────────────────────────────────────── */
+.sidebar__search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 36px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 3px solid transparent;
+}
+
+/* TickerInput inside sidebar — make it fill available space */
+.sidebar__search .ticker-input-wrap { flex: 1; display: block; }
+.sidebar__search .ticker-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text-primary);
+  font-size: var(--text-body-size);
+  caret-color: var(--color-accent);
+  padding: 0;
+}
+.sidebar__search .ticker-input::placeholder { color: var(--color-text-muted); }
+.sidebar__search .ticker-input:focus { border-color: transparent; }
+/* Dropdown in sidebar needs high z-index to clear nav */
+.sidebar__search .ticker-dropdown { min-width: 200px; }
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+.sidebar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.sidebar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.sidebar__icon-btn:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-text-primary);
+}
+
+.sidebar__icon-btn--active { color: var(--color-accent); }
+
+.sidebar--collapsed .sidebar__footer {
+  flex-direction: column;
+  gap: var(--space-xs);
+}

@@ -1,0 +1,88 @@
+.price-chart-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.price-chart-panel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.range-selector {
+  display: flex;
+  gap: 2px;
+}
+
+.range-btn {
+  padding: 3px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-label-weight);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.range-btn:hover { background: var(--color-surface-raised); color: var(--color-text-primary); }
+.range-btn--active { background: var(--color-surface-raised); color: var(--color-accent); border-color: var(--color-accent); }
+
+.sma-toggles {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.sma-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.chart-container { min-height: 100px; }
+.chart-error { padding: var(--space-sm); }
+
+/* Chart heights are now driven by useChartHeight hook — no CSS clipping needed */
+
+/* ── Indicator collapsible sections ─────────────────────────────────── */
+.indicator-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-sm);
+  overflow: hidden;
+}
+
+.indicator-header {
+  width: 100%;
+  padding: var(--space-sm) var(--space-lg);
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: background 0.1s;
+}
+.indicator-header:hover { background: var(--color-surface-raised); }
+
+.indicator-body {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+.indicator-body--collapsed { max-height: 0; }
+

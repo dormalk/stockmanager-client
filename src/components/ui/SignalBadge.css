@@ -1,0 +1,20 @@
+.signal-badge {
+  display: inline-block;
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  font-weight: 600;
+  letter-spacing: var(--text-label-ls);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.signal-badge--sm { font-size: 10px; padding: 1px 5px; }
+
+.signal-badge--strong-buy  { background: #1A7F37; color: #0D1117; }
+.signal-badge--buy         { background: #2EA043; color: #0D1117; }
+.signal-badge--hold        { background: var(--color-neutral-bg); color: var(--color-text-primary); }
+.signal-badge--sell        { background: #E5534B; color: #FFFFFF; }
+.signal-badge--strong-sell { background: #C93C37; color: #FFFFFF; }
+.signal-badge--none        { background: transparent; color: var(--color-text-muted); }

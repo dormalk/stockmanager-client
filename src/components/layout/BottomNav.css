@@ -1,0 +1,81 @@
+/* Bottom nav only shown on mobile via Layout.tsx conditional */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  z-index: 100;
+  /* Safe area inset for phones with home bar */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-top: 3px solid transparent;
+  color: var(--color-text-muted);
+  font-size: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.1s, border-top-color 0.1s;
+}
+
+.bottom-nav__item--active {
+  border-top-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.bottom-nav__item:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-raised);
+}
+
+/* Search overlay (AC-3) */
+.bottom-nav-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-md);
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* TickerInput wrapper fills the flex container */
+.bottom-nav-search-overlay .ticker-input-wrap { flex: 1; display: block; }
+.bottom-nav-search-input { width: 100%; }
+
+.bottom-nav-search-close {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+.bottom-nav-search-close:hover { color: var(--color-text-primary); }

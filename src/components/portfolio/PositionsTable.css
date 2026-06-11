@@ -1,0 +1,117 @@
+.positions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.positions-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: 0 0 var(--space-sm);
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--text-data-size);
+}
+
+.positions-table th {
+  height: 36px;
+  padding: 0 12px;
+  text-align: left;
+  font-size: var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  letter-spacing: var(--text-label-ls);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.positions-table th.sortable { cursor: pointer; }
+.positions-table th.sortable:hover { color: var(--color-text-primary); }
+.positions-table th.sorted {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.sort-glyph { font-size: 10px; }
+
+.positions-table td {
+  height: 36px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  white-space: nowrap;
+  color: var(--color-text-primary);
+}
+
+.align-right { text-align: right; }
+
+.position-row { cursor: pointer; transition: background 0.1s ease; }
+.position-row:hover { background: var(--color-surface-raised); }
+.position-row--closed td { color: var(--color-text-muted); }
+
+.ticker-cell {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.closed-chip {
+  font-size: var(--text-caption-size);
+  background: var(--color-neutral-bg);
+  color: var(--color-neutral);
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl) !important;
+}
+
+.notes-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px;
+  opacity: 0.6;
+  transition: opacity 0.1s;
+}
+
+.position-row:hover .notes-icon-btn { opacity: 1; }
+
+/* "All Columns" toggle — only shown on mobile */
+.show-cols-btn { display: none; }
+
+/* ── Mobile column priority (AC-7) ──────────────────────────────────── */
+@media (max-width: 767px) {
+  .show-cols-btn { display: inline-flex; }
+
+  /* Hidden by default on mobile; ".show-all-cols" class on table reveals them */
+  .positions-table:not(.show-all-cols) .col-avg-cost,
+  .positions-table:not(.show-all-cols) .col-total-cost,
+  .positions-table:not(.show-all-cols) .col-sector {
+    display: none;
+  }
+}

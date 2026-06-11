@@ -1,0 +1,43 @@
+.confirm-popover {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 50;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+.confirm-popover__msg {
+  color: var(--color-text-secondary);
+}
+
+.confirm-popover__actions {
+  display: flex;
+  gap: var(--space-xs);
+  justify-content: flex-end;
+}
+
+.btn--sm {
+  padding: 3px 10px;
+  font-size: var(--text-caption-size);
+}
+
+.btn--danger {
+  background: var(--color-bear);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.btn--danger:hover { opacity: 0.85; }

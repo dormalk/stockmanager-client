@@ -1,0 +1,26 @@
+.tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip {
+  position: absolute;
+  left: 0;
+  z-index: 300;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-caption-weight);
+  color: var(--color-text-secondary);
+  max-width: 240px;
+  white-space: normal;
+  pointer-events: none;
+  line-height: var(--text-caption-lh);
+}
+
+.tooltip--above { bottom: calc(100% + 6px); }
+.tooltip--below { top:    calc(100% + 6px); }

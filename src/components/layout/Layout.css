@@ -1,0 +1,41 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.layout__content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.page {
+  padding: var(--space-xl);
+  min-height: 100%;
+}
+
+/* ── Mobile (< 768px): bottom nav, full-width content ─────────────────── */
+@media (max-width: 767px) {
+  .layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .layout__content {
+    overflow-y: visible;
+    padding-bottom: 72px; /* clearance above 64px bottom nav */
+  }
+
+  .page {
+    padding: var(--space-md); /* reduced padding on mobile */
+  }
+
+  /* Hide sidebar — BottomNav takes over (AC-2) */
+  .sidebar {
+    display: none !important;
+  }
+}

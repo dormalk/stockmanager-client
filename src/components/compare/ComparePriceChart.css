@@ -1,0 +1,103 @@
+.compare-chart-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.compare-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.compare-chart-error { padding: var(--space-sm) 0; }
+
+/* Click snapshot bar */
+.chart-snapshot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: 5px var(--space-md);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  animation: snapshot-in 0.1s ease;
+}
+
+@keyframes snapshot-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chart-snapshot__date {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.chart-snapshot__entry {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.chart-snapshot__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chart-snapshot__dismiss {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+.chart-snapshot__dismiss:hover { color: var(--color-bear); }
+
+.compare-chart-skeleton {
+  border-radius: var(--radius-md);
+  display: block !important;
+}
+
+@media (max-width: 767px) {
+  /* Remove card-within-card nesting — chart fills the full container width */
+  .compare-chart-section {
+    padding: var(--space-sm) 0 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Keep the header padded so controls stay readable */
+  .compare-chart-header {
+    padding: 0 var(--space-md);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Range buttons wrap if too many */
+  .range-selector { flex-wrap: wrap; }
+
+  /* Chart div itself: no margins, flush to edges */
+  .compare-chart-section > div:last-child {
+    margin: 0 !important;
+  }
+}

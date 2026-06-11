@@ -1,0 +1,111 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography utility classes ─────────────────────────────────────── */
+.text-display {
+  font-family: var(--font-mono);
+  font-size: var(--text-display-size);
+  font-weight: var(--text-display-weight);
+  line-height: var(--text-display-lh);
+  letter-spacing: var(--text-display-ls);
+}
+
+.text-heading {
+  font-family: var(--font-mono);
+  font-size: var(--text-heading-size);
+  font-weight: var(--text-heading-weight);
+  line-height: var(--text-heading-lh);
+  letter-spacing: var(--text-heading-ls);
+}
+
+.text-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  line-height: var(--text-label-lh);
+  letter-spacing: var(--text-label-ls);
+  text-transform: uppercase;
+}
+
+.text-body {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+}
+
+.text-data {
+  font-family: var(--font-mono);
+  font-size: var(--text-data-size);
+  font-weight: var(--text-data-weight);
+  line-height: var(--text-data-lh);
+  letter-spacing: var(--text-data-ls);
+}
+
+.text-data-lg {
+  font-family: var(--font-mono);
+  font-size: var(--text-data-lg-size);
+  font-weight: var(--text-data-lg-weight);
+  line-height: var(--text-data-lg-lh);
+  letter-spacing: var(--text-data-lg-ls);
+}
+
+.text-caption {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-caption-weight);
+  line-height: var(--text-caption-lh);
+  letter-spacing: var(--text-caption-ls);
+}
+
+/* ── Color utility classes ──────────────────────────────────────────── */
+.color-bull    { color: var(--color-bull); }
+.color-bear    { color: var(--color-bear); }
+.color-neutral { color: var(--color-neutral); }
+.color-muted   { color: var(--color-text-muted); }
+.color-accent  { color: var(--color-accent); }
+
+/* ── Focus rings ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-background); }
+::-webkit-scrollbar-thumb  { background: var(--color-border); border-radius: var(--radius-full); }
+
+/* ── Mobile touch targets (AC-14) ───────────────────────────────────── */
+@media (max-width: 767px) {
+  .btn,
+  .sidebar__icon-btn,
+  .trash-btn,
+  .bell-btn,
+  .notes-icon-btn,
+  .reset-btn,
+  .range-btn,
+  .wl-tab__btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

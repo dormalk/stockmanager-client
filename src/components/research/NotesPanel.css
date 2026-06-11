@@ -1,0 +1,62 @@
+.notes-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.notes-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.notes-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 160px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
+  resize: vertical;
+  outline: none;
+}
+
+.notes-textarea:focus { border-color: var(--color-accent); }
+.notes-textarea::placeholder { color: var(--color-text-muted); }
+
+.save-indicator {
+  min-width: 60px;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.save-indicator--saving { opacity: 1; color: var(--color-text-muted); }
+.save-indicator--saved  { opacity: 1; color: var(--color-bull); }
+
+.md-toolbar { display: flex; gap: 2px; flex-wrap: wrap; }
+.md-btn { background: transparent; border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-secondary); font-family: var(--font-mono); font-size: var(--text-caption-size); padding: 2px 7px; cursor: pointer; transition: background 0.1s; }
+.md-btn:hover   { background: var(--color-surface-raised); }
+.md-btn--active { background: var(--color-surface-raised); color: var(--color-accent); }
+.md-italic      { font-style: italic; }
+
+.notes-preview { min-height: 160px; background: var(--color-surface-raised); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-sm); line-height: 1.6; }
+.notes-preview h2, .notes-preview h3 { color: var(--color-text-primary); margin: var(--space-sm) 0 4px; }
+.notes-preview ul, .notes-preview ol  { padding-left: var(--space-lg); }
+.notes-preview p { margin: 4px 0; }
