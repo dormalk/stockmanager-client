@@ -1,13 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'fs'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-
-function readCss(relativePath: string): string {
-  return readFileSync(join(__dirname, relativePath), 'utf-8')
-}
+import priceChartCss from './research/PriceChart.css?raw'
+import allocationChartCss from './portfolio/AllocationChart.css?raw'
+import sectorChartCss from './portfolio/SectorChart.css?raw'
+import comparePriceChartCss from './compare/ComparePriceChart.css?raw'
 
 function mobileBlock(css: string): string {
   const match = css.match(/@media \(max-width: 767px\) \{[\s\S]*\}\s*$/)
@@ -17,22 +12,22 @@ function mobileBlock(css: string): string {
 
 describe('CR-6: mobile chart full-width CSS overrides', () => {
   it('removes horizontal padding from .price-chart-panel on mobile', () => {
-    const block = mobileBlock(readCss('research/PriceChart.css'))
+    const block = mobileBlock(priceChartCss)
     expect(block).toMatch(/\.price-chart-panel\s*\{[^}]*padding:\s*var\(--space-sm\) 0 0/)
   })
 
   it('removes horizontal padding from .alloc-chart on mobile', () => {
-    const block = mobileBlock(readCss('portfolio/AllocationChart.css'))
+    const block = mobileBlock(allocationChartCss)
     expect(block).toMatch(/\.alloc-chart\s*\{[^}]*padding:\s*var\(--space-sm\) 0 0/)
   })
 
   it('removes horizontal padding from .sector-chart on mobile', () => {
-    const block = mobileBlock(readCss('portfolio/SectorChart.css'))
+    const block = mobileBlock(sectorChartCss)
     expect(block).toMatch(/\.sector-chart\s*\{[^}]*padding:\s*var\(--space-sm\) 0 0/)
   })
 
   it('removes horizontal padding from .compare-chart-section on mobile (covers SectorPerformanceChart)', () => {
-    const block = mobileBlock(readCss('compare/ComparePriceChart.css'))
+    const block = mobileBlock(comparePriceChartCss)
     expect(block).toMatch(/\.compare-chart-section\s*\{[^}]*padding:\s*var\(--space-sm\) 0 0/)
   })
 })
