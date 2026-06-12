@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { apiBase } from '../api/client'
+import DataExportImport from '../components/settings/DataExportImport'
 import './Settings.css'
 
 interface StatusData {
@@ -60,6 +61,8 @@ export default function Settings() {
           This is an unofficial API with no SLA.
         </p>
       </section>
+
+      <DataExportImport />
     </main>
   )
 }

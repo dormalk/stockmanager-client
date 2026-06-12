@@ -86,3 +86,25 @@
 }
 .indicator-body--collapsed { max-height: 0; }
 
+@media (max-width: 767px) {
+  /* Remove card-within-card nesting — chart fills the full container width */
+  .price-chart-panel {
+    padding: var(--space-sm) 0 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Keep controls and errors padded so they stay readable */
+  .price-chart-panel__controls,
+  .chart-error {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  /* Chart itself: no margins, flush to edges */
+  .chart-container > div {
+    margin: 0 !important;
+  }
+}
+

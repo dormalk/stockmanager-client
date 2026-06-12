@@ -4,6 +4,7 @@ import Plot, { type PlotClickPoint } from '../ui/PlotComponent'
 import Skeleton from '../ui/Skeleton'
 import { fetchSectorPerformance } from '../../api/research'
 import { useChartHeight } from '../../hooks/useChartHeight'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import '../compare/ComparePriceChart.css'
 
 type Range = '1M' | '3M' | '6M' | '1Y'
@@ -32,7 +33,9 @@ interface Props { ticker: string }
 export default function SectorPerformanceChart({ ticker }: Props) {
   const [range, setRange] = useState<Range>('1Y')
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null)
+  const [showLegend, setShowLegend] = useState(false)
   const qc = useQueryClient()
+  const isMobile = useMediaQuery('(max-width: 767px)')
   const chartHeight = useChartHeight(280, 240, 200)
 
   const { data, isLoading, isError } = useQuery({
@@ -73,10 +76,12 @@ export default function SectorPerformanceChart({ ticker }: Props) {
 
   const layout = {
     ...DARK,
-    margin:     { t: 8, b: 48, l: 60, r: 8 },
+    margin:     isMobile ? { t: 8, b: 48, l: 44, r: 8 } : { t: 8, b: 48, l: 60, r: 8 },
     height:     chartHeight,
-    showlegend: true,
-    legend:     { bgcolor: 'transparent', font: { color: '#6E7681', size: 11 } },
+    showlegend: isMobile ? showLegend : true,
+    legend:     isMobile
+      ? { orientation: 'h' as const, x: 0, y: -0.25, bgcolor: 'transparent', font: { color: '#6E7681', size: 10 } }
+      : { bgcolor: 'transparent', font: { color: '#6E7681', size: 11 } },
     hovermode:  'x unified' as const,
     shapes:     clickShape,
     xaxis: { gridcolor: DARK.gridcolor, linecolor: DARK.linecolor },
@@ -112,6 +117,14 @@ export default function SectorPerformanceChart({ ticker }: Props) {
               aria-pressed={range === r}
             >{r}</button>
           ))}
+          {isMobile && (
+            <button
+              className={`range-btn${showLegend ? ' range-btn--active' : ''}`}
+              onClick={() => setShowLegend(p => !p)}
+              aria-pressed={showLegend}
+              aria-label="Toggle legend"
+            >Legend</button>
+          )}
         </div>
       </div>
 

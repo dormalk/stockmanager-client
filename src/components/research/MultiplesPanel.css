@@ -139,3 +139,28 @@
   gap: 4px;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  /* Remove card-within-card nesting — chart fills the full container width */
+  .multiples-panel {
+    padding: var(--space-sm) 0 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Keep header, selectors, and toolbars padded so they stay readable */
+  .multiples-panel__header,
+  .multiples-groups,
+  .comp-toolbar,
+  .comp-legend,
+  .multiples-panel > p {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  /* Chart itself: no margins, flush to edges */
+  .multiples-chart-container > div {
+    margin: 0 !important;
+  }
+}

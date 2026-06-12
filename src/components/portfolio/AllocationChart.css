@@ -11,3 +11,18 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 767px) {
+  /* Remove card-within-card nesting — chart fills the full container width */
+  .alloc-chart {
+    padding: var(--space-sm) 0 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Keep the heading padded so it stays readable */
+  .alloc-chart > h2 {
+    padding: 0 var(--space-md);
+  }
+}

@@ -7,6 +7,7 @@ import {
   type MultiplePoint,
 } from '../../api/research'
 import { useChartHeight } from '../../hooks/useChartHeight'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import './MultiplesPanel.css'
 
 
@@ -30,7 +31,9 @@ export default function MultiplesPanel({ ticker }: Props) {
   const [compTickers, setCompTickers] = useState<string[]>([])
   const [tickerInput, setTickerInput] = useState('')
   const [hiddenTickers, setHiddenTickers] = useState<Set<string>>(new Set())
+  const [showLegend, setShowLegend] = useState(false)
   const qc = useQueryClient()
+  const isMobile = useMediaQuery('(max-width: 767px)')
   const chartHeight = useChartHeight(260, 220, 180)
 
   const isCompareMode = compTickers.length > 0
@@ -156,6 +159,14 @@ export default function MultiplesPanel({ ticker }: Props) {
             onClick={() => setMode('absolute')}>Absolute</button>
           <button className={`mode-btn${mode === 'pct' ? ' mode-btn--active' : ''}`}
             onClick={() => setMode('pct')}>% Change</button>
+          {isMobile && (
+            <button
+              className={`mode-btn${showLegend ? ' mode-btn--active' : ''}`}
+              onClick={() => setShowLegend(p => !p)}
+              aria-pressed={showLegend}
+              aria-label="Toggle legend"
+            >Legend</button>
+          )}
         </div>
       </div>
 
@@ -210,10 +221,12 @@ export default function MultiplesPanel({ ticker }: Props) {
             data={traces}
             layout={{
               ...DARK,
-              margin: { t: 8, b: 40, l: 55, r: 8 },
+              margin: isMobile ? { t: 8, b: 40, l: 40, r: 8 } : { t: 8, b: 40, l: 55, r: 8 },
               height: chartHeight,
-              showlegend: true,
-              legend: { font: { size: 10, color: '#8B949E' }, bgcolor: 'transparent' },
+              showlegend: isMobile ? showLegend : true,
+              legend: isMobile
+                ? { orientation: 'h' as const, x: 0, y: -0.25, font: { size: 10, color: '#8B949E' }, bgcolor: 'transparent' }
+                : { font: { size: 10, color: '#8B949E' }, bgcolor: 'transparent' },
               hovermode: 'x unified',
               xaxis: { gridcolor: DARK.gridcolor, linecolor: DARK.linecolor },
               yaxis: {

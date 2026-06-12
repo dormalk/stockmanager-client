@@ -49,7 +49,7 @@ export default function Plot({ data, layout, config, style, onPlotClick, onAfter
     if (!ref.current) return
     const el = ref.current
     getPlotly().then(Plotly => {
-      Plotly.react(el, data, layout ?? {}, { displayModeBar: false, responsive: true, ...config })
+      Plotly.react(el, data, { autosize: true, ...layout }, { displayModeBar: false, responsive: true, ...config })
 
       if (!listenerAttached.current) {
         // Plotly adds event-emitter methods (.on/.removeAllListeners) directly to the div

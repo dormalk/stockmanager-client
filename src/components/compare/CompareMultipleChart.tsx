@@ -113,9 +113,10 @@ export default function CompareMultipleChart({ tickers, metric, metricLabel }: P
 
   return (
     <div aria-label={`${metricLabel} comparison chart, ${range}`}
-         style={isMobile ? { padding: 'var(--space-sm) var(--space-md) 0' } : undefined}>
+         style={isMobile ? { padding: 'var(--space-sm) 0 0' } : undefined}>
 
-      <div className="range-selector" style={{ marginBottom: 'var(--space-sm)' }}>
+      <div className="range-selector"
+           style={{ marginBottom: 'var(--space-sm)', ...(isMobile ? { padding: '0 var(--space-md)' } : {}) }}>
         {RANGES.map(r => (
           <button key={r}
             className={`range-btn${range === r ? ' range-btn--active' : ''}`}
@@ -141,7 +142,8 @@ export default function CompareMultipleChart({ tickers, metric, metricLabel }: P
       )}
 
       {isError && (
-        <p className="text-caption color-muted" style={{ padding: 'var(--space-sm) 0' }}>
+        <p className="text-caption color-muted"
+           style={{ padding: isMobile ? 'var(--space-sm) var(--space-md)' : 'var(--space-sm) 0' }}>
           Failed to load {metricLabel} data.{' '}
           <button className="link-btn text-caption"
             onClick={() => qc.invalidateQueries({ queryKey: ['compare-multiples', tickers.join(','), metric] })}>
