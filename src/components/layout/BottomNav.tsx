@@ -45,7 +45,7 @@ export default function BottomNav() {
         <NavLink to="/" end
           className={({ isActive }) => `bottom-nav__item${isActive ? ' bottom-nav__item--active' : ''}`}
           aria-label="Portfolio">
-          <span aria-hidden="true">▣</span>
+          <span aria-hidden="true">⌂</span>
         </NavLink>
 
         <button
@@ -58,7 +58,7 @@ export default function BottomNav() {
         <NavLink to="/watchlist"
           className={({ isActive }) => `bottom-nav__item${isActive ? ' bottom-nav__item--active' : ''}`}
           aria-label="Watchlist">
-          <span aria-hidden="true">◈</span>
+          <span aria-hidden="true">★</span>
         </NavLink>
 
         <NavLink to="/compare"
@@ -70,7 +70,7 @@ export default function BottomNav() {
         <NavLink to="/trades"
           className={({ isActive }) => `bottom-nav__item${isActive ? ' bottom-nav__item--active' : ''}`}
           aria-label="Trade History">
-          <span aria-hidden="true">↕</span>
+          <span aria-hidden="true">▤</span>
         </NavLink>
 
         <NavLink to="/settings"

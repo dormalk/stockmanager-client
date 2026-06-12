@@ -51,7 +51,7 @@ export default function Sidebar() {
           className={({ isActive }) => `sidebar__item${isActive ? ' sidebar__item--active' : ''}`}
           aria-label="Portfolio"
         >
-          <span className="sidebar__icon" aria-hidden="true">▣</span>
+          <span className="sidebar__icon" aria-hidden="true">⌂</span>
           {!collapsed && <span className="sidebar__label">Portfolio</span>}
         </NavLink>
 
@@ -86,7 +86,7 @@ export default function Sidebar() {
           className={({ isActive }) => `sidebar__item${isActive ? ' sidebar__item--active' : ''}`}
           aria-label="Watchlist"
         >
-          <span className="sidebar__icon" aria-hidden="true">◈</span>
+          <span className="sidebar__icon" aria-hidden="true">★</span>
           {!collapsed && <span className="sidebar__label">Watchlist</span>}
         </NavLink>
 
@@ -104,7 +104,7 @@ export default function Sidebar() {
           className={({ isActive }) => `sidebar__item${isActive ? ' sidebar__item--active' : ''}`}
           aria-label="Trade History"
         >
-          <span className="sidebar__icon" aria-hidden="true">↕</span>
+          <span className="sidebar__icon" aria-hidden="true">▤</span>
           {!collapsed && <span className="sidebar__label">Trade History</span>}
         </NavLink>
       </nav>
