@@ -172,12 +172,23 @@ export default function PositionsTable({ positions, loading, hasStalePrice, sign
                 <td className="align-right">
                   {tickersWithNotes?.has(pos.ticker) && (
                     <button
+                      type="button"
                       className="notes-icon-btn"
                       onClick={e => { e.stopPropagation(); onOpenNotes?.(pos.ticker) }}
                       aria-label={`View note for ${pos.ticker}`}
                       title={`View note for ${pos.ticker}`}
                     >📄</button>
                   )}
+                  <button
+                    type="button"
+                    className="manage-trades-btn"
+                    onClick={e => {
+                      e.stopPropagation()
+                      if (pos.ticker) navigate(`/trades?ticker=${encodeURIComponent(pos.ticker)}`)
+                    }}
+                    aria-label={`Manage trades for ${pos.ticker}`}
+                    title={`Manage trades for ${pos.ticker}`}
+                  >🗑</button>
                 </td>
               </tr>
             ))}

@@ -114,4 +114,22 @@ describe('PositionsTable', () => {
     await userEvent.click(screen.getByRole('checkbox', { name: /show closed/i }))
     expect(screen.getByText('OLD')).toBeInTheDocument()
   })
+
+  it('navigates to trade history filtered by ticker when manage-trades icon is clicked', async () => {
+    renderTable()
+    mockNavigate.mockClear()
+    const btn = screen.getByRole('button', { name: /manage trades for aapl/i })
+    await userEvent.click(btn)
+    expect(mockNavigate).toHaveBeenCalledTimes(1)
+    expect(mockNavigate).toHaveBeenCalledWith('/trades?ticker=AAPL')
+  })
+
+  it('does not trigger row navigation when the manage-trades icon is clicked', async () => {
+    renderTable()
+    mockNavigate.mockClear()
+    const btn = screen.getByRole('button', { name: /manage trades for aapl/i })
+    await userEvent.click(btn)
+    expect(mockNavigate).toHaveBeenCalledTimes(1)
+    expect(mockNavigate).toHaveBeenCalledWith('/trades?ticker=AAPL')
+  })
 })

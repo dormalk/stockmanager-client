@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import FAB from '../components/ui/FAB'
 import AddTradeModal from '../components/modals/AddTradeModal'
@@ -7,8 +8,9 @@ import { fetchTrades } from '../api/trades'
 import './Trades.css'
 
 export default function Trades() {
+  const [searchParams] = useSearchParams()
   const [modalOpen, setModalOpen] = useState(false)
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState(() => searchParams.get('ticker')?.toUpperCase() ?? '')
 
   const { data: trades = [], isLoading } = useQuery({
     queryKey: ['trades'],

@@ -89,17 +89,24 @@
   padding: var(--space-2xl) !important;
 }
 
-.notes-icon-btn {
+.notes-icon-btn,
+.manage-trades-btn {
   background: transparent;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 13px;
   padding: 2px;
   opacity: 0.6;
-  transition: opacity 0.1s;
+  transition: opacity 0.1s, background 0.1s;
 }
 
-.position-row:hover .notes-icon-btn { opacity: 1; }
+.position-row:hover .notes-icon-btn,
+.position-row:hover .manage-trades-btn { opacity: 1; }
+
+@media (hover: hover) {
+  .manage-trades-btn:hover { background: var(--color-bear-bg); opacity: 1; }
+}
 
 /* "All Columns" toggle — only shown on mobile */
 .show-cols-btn { display: none; }
